@@ -1,15 +1,16 @@
 import { betterAuth } from "better-auth";
 import { toNodeHandler } from "better-auth/node";
+import { createRequire } from "module";
 import { Pool } from "pg";
 import { sendPasswordResetEmail, sendVerificationEmail } from "./server/email.mjs";
 import { getPasswordResetEmailTemplate, getVerificationEmailTemplate } from "./server/emailTemplates.mjs";
 
+const require = createRequire(import.meta.url);
+const { getAllowedOrigins } = require("./src/config/origins.js");
+
 const connectionString = process.env.DATABASE_URL;
 const authBaseURL = process.env.BETTER_AUTH_URL || "http://localhost:5000";
-const webOrigins = (process.env.WEB_ORIGINS || process.env.WEB_ORIGIN || "http://localhost:3000")
-  .split(",")
-  .map((item) => item.trim())
-  .filter(Boolean);
+const webOrigins = getAllowedOrigins();
 const hasEmailCredentials = Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASSWORD);
 
 if (!process.env.BETTER_AUTH_SECRET) {

@@ -4,6 +4,7 @@ require('express-async-errors');
 const morgan = require('morgan');
 const cors = require('cors');
 
+const { getAllowedOrigins } = require('./config/origins');
 const itemRoutes = require('./routes/itemRoutes');
 const roomRoutes = require('./routes/roomRoutes');
 const messageRoutes = require('./routes/messageRoutes');
@@ -14,7 +15,7 @@ const app = express();
 
 // Allow the frontend to send custom headers like `x-user-id` for auth forwarding
 app.use(cors({
-	origin: true,
+	origin: getAllowedOrigins(),
 	allowedHeaders: ['Content-Type', 'Authorization', 'x-user-id', 'X-Requested-With'],
 	credentials: true,
 }));
