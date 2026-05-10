@@ -36,8 +36,6 @@ export default function RegisterForm() {
       router.push("/");
     } catch (err) {
       setError(err?.message || "Network error");
-    } finally {
-       await router.refresh()
       setLoading(false);
     }
   };
