@@ -23,17 +23,38 @@ export default async function FoundPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-slate-50 to-slate-50 p-6 md:p-8">
-      <div className="max-w-7xl mx-auto">
-        <header className="mb-10">
-          <div className="flex items-center justify-between mb-2">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900">Found Items</h1>
-            <span className="text-4xl">✨</span>
-          </div>
-          <p className="text-slate-600 text-lg">Items waiting for their owners</p>
+    <main style={{ background: '#f5f4f0', minHeight: '100vh' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '48px 24px' }}>
+        <header style={{ marginBottom: '48px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '500', color: '#0d9e6e', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '16px' }}>Lost & Found</div>
+          <h1 style={{ fontSize: '36px', fontWeight: '500', color: '#1a1a1a', letterSpacing: '-0.5px', marginBottom: '12px' }}>Found Items</h1>
+          <p style={{ fontSize: '14px', color: '#888', marginBottom: '24px' }}>Items waiting for their owners</p>
+          <a
+            href="#report-form"
+            style={{
+              background: '#0d9e6e',
+              color: 'white',
+              border: 'none',
+              borderRadius: '40px',
+              padding: '11px 22px',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              gap: '8px',
+              alignItems: 'center',
+              textDecoration: 'none',
+              transition: 'background 0.2s'
+            }}
+          >
+            <span>+</span>
+            Add Found Item
+          </a>
         </header>
 
-        <LostFoundToggle type="found" userId={userId} formTitle="Report Found Item" formIcon="📝" />
+        <div id="report-form">
+          <LostFoundToggle type="found" userId={userId} formTitle="Report Found Item" formIcon="📝" />
+        </div>
       </div>
     </main>
   );

@@ -121,13 +121,29 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
   const getStatusBadge = (itemStatus) => {
     if (itemStatus === 'delivered') {
       return (
-        <span className="text-xs px-2 py-1 rounded-full font-medium bg-emerald-100 text-emerald-700">
+        <span style={{
+          fontSize: '11px',
+          fontWeight: '500',
+          borderRadius: '20px',
+          padding: '3px 9px',
+          background: '#eff6ff',
+          color: '#1d4ed8',
+          border: '0.5px solid #bfdbfe'
+        }}>
           ✓ Delivered
         </span>
       );
     }
     return (
-      <span className="text-xs px-2 py-1 rounded-full font-medium bg-amber-100 text-amber-700">
+      <span style={{
+        fontSize: '11px',
+        fontWeight: '500',
+        borderRadius: '20px',
+        padding: '3px 9px',
+        background: '#fffbeb',
+        color: '#b45309',
+        border: '0.5px solid #fde68a'
+      }}>
         ⏳ Still waiting
       </span>
     );
@@ -145,8 +161,8 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
       <div className={containerClass}>
         {items.length === 0 && <div className="text-center p-12 text-slate-400 text-sm col-span-full">No items found yet.</div>}
         {items.map((it) => (
-          <article key={it._id || it.id} className="bg-white rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100 flex items-start gap-6">
-            <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
+          <article key={it._id || it.id} style={{ background: '#ffffff', borderRadius: '18px', padding: '18px', border: '0.5px solid #ebe9e4', display: 'flex', gap: '16px', alignItems: 'flex-start', transition: 'border-color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = '#b8e4d3'} onMouseLeave={(e) => e.currentTarget.style.borderColor = '#ebe9e4'}>
+            <div style={{ width: '80px', height: '80px', borderRadius: '12px', background: '#f0efe9', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
               {it.imageUrl ? (
                 <img
                   src={it.imageUrl}
@@ -159,36 +175,51 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
                 <div className="text-5xl">📦</div>
               )}
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-slate-900 truncate">{it.title}</h3>
-                  <p className="text-sm text-slate-500 mt-1">{it.category || 'General'}</p>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '12px', marginBottom: '8px', alignItems: 'flex-start' }}>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: '15px', fontWeight: '500', color: '#1a1a1a', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{it.title}</h3>
+                  <p style={{ fontSize: '11px', color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.04em', marginTop: '4px' }}>{it.category || 'General'}</p>
                 </div>
-                <div className="flex gap-2 flex-shrink-0">
-                  <span className={`text-xs px-3 py-1.5 rounded-full font-medium whitespace-nowrap ${
-                    it.type === 'lost'
-                      ? 'bg-rose-100 text-rose-700'
-                      : 'bg-emerald-100 text-emerald-700'
-                  }`}>
-                    {it.type === 'lost' ? '● Lost' : '● Found'}
+                <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
+                  <span style={{
+                    fontSize: '11px',
+                    fontWeight: '500',
+                    borderRadius: '20px',
+                    padding: '3px 9px',
+                    whiteSpace: 'nowrap',
+                    ...(it.type === 'lost' ? { background: '#fef2f2', color: '#c0392b', border: '0.5px solid #fad5d5' } : { background: '#e8f8f2', color: '#0d7a56', border: '0.5px solid #b8e4d3' })
+                  }}>
+                    {it.type === 'lost' ? 'Lost' : 'Found'}
                   </span>
                   {getStatusBadge(it.status || 'not-delivered')}
                 </div>
               </div>
-              <p className="text-sm text-slate-600 line-clamp-2 mb-4">{it.description || 'No description'}</p>
-              <div className="flex items-center gap-4 text-xs text-slate-500 mb-4">
-                <span className="flex items-center gap-1">📍 {it.location || 'Unknown location'}</span>
-                <span className="text-slate-300">•</span>
+              <p style={{ fontSize: '13px', color: '#666', marginBottom: '12px', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{it.description || 'No description'}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '11px', color: '#aaa', marginBottom: '12px' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>📍 {it.location || 'Unknown location'}</span>
+                <span style={{ color: '#ddd' }}>•</span>
                 <span>{new Date(it.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                 {isDashboard && it.userId === userId ? (
                   <>
                     <button
                       onClick={() => handleToggleStatus(it)}
                       disabled={togglingStatus === it._id}
-                      className="px-4 py-2 text-sm font-medium rounded-full bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white transition-colors duration-200"
+                      style={{
+                        padding: '7px 15px',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        borderRadius: '20px',
+                        background: togglingStatus === it._id ? '#ddd' : '#0d9e6e',
+                        color: '#fff',
+                        border: 'none',
+                        cursor: togglingStatus === it._id ? 'not-allowed' : 'pointer',
+                        transition: 'background 0.2s'
+                      }}
+                      onMouseEnter={(e) => !togglingStatus && (e.target.style.background = '#0a8456')}
+                      onMouseLeave={(e) => !togglingStatus && (e.target.style.background = '#0d9e6e')}
                     >
                       {togglingStatus === it._id
                         ? 'Updating...'
@@ -196,15 +227,29 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
                           ? 'Mark as waiting'
                           : 'Mark as delivered'}
                     </button>
-                    <div className="relative">
+                    <div style={{ position: 'relative' }}>
                       <button
                         onClick={() => handleViewChats(it)}
-                        className="px-4 py-2 text-sm font-medium rounded-full bg-purple-600 hover:bg-purple-700 text-white transition-colors duration-200 flex items-center gap-2"
+                        style={{
+                          padding: '7px 15px',
+                          fontSize: '12px',
+                          fontWeight: '500',
+                          borderRadius: '20px',
+                          background: '#0d9e6e',
+                          color: '#fff',
+                          border: 'none',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          gap: '6px',
+                          alignItems: 'center'
+                        }}
+                        onMouseEnter={(e) => e.target.style.background = '#0a8456'}
+                        onMouseLeave={(e) => e.target.style.background = '#0d9e6e'}
                       >
                         💬 View Chats
                       </button>
                       {chatCounts[it._id] > 0 && (
-                        <span className="absolute -top-2 -right-2 flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-600 rounded-full">
+                        <span style={{ position: 'absolute', top: '-8px', right: '-8px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '22px', height: '22px', fontSize: '11px', fontWeight: '700', color: '#fff', background: '#ef4444', borderRadius: '50%' }}>
                           {chatCounts[it._id]}
                         </span>
                       )}
@@ -214,9 +259,24 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
                   <button
                     onClick={() => handleMessageClick(it)}
                     disabled={creatingRoom === it._id}
-                    className="px-4 py-2 text-sm font-medium rounded-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white transition-colors duration-200"
+                    style={{
+                      padding: '7px 15px',
+                      fontSize: '12px',
+                      fontWeight: '500',
+                      borderRadius: '20px',
+                      background: creatingRoom === it._id ? '#ddd' : '#e8f8f2',
+                      color: creatingRoom === it._id ? '#999' : '#0d7a56',
+                      border: '0.5px solid #b8e4d3',
+                      cursor: creatingRoom === it._id ? 'not-allowed' : 'pointer',
+                      transition: 'all 0.2s',
+                      display: 'flex',
+                      gap: '6px',
+                      alignItems: 'center'
+                    }}
+                    onMouseEnter={(e) => !creatingRoom && (e.target.style.background = '#d0f0eb')}
+                    onMouseLeave={(e) => !creatingRoom && (e.target.style.background = '#e8f8f2')}
                   >
-                    {creatingRoom === it._id ? 'Opening chat...' : 'Message'}
+                    💬 {creatingRoom === it._id ? 'Opening chat...' : 'Message'}
                   </button>
                 ) : null}
               </div>

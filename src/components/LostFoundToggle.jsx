@@ -14,40 +14,41 @@ export default function LostFoundToggle({ type, userId, formTitle, formIcon }) {
   };
 
   return (
-    <div className="space-y-8">
-      {/* Toggle Button */}
-      <div className="flex justify-center">
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white font-semibold rounded-full transition-all duration-200 shadow-md hover:shadow-lg flex items-center gap-2"
-        >
-          <span className="text-xl">{showForm ? '✕' : '➕'}</span>
-          {showForm ? 'Cancel' : `Add ${type === 'lost' ? 'Lost' : 'Found'} Item`}
-        </button>
-      </div>
-
+    <div style={{ marginTop: '32px' }}>
       {/* Form Section - Collapsible */}
       {showForm && (
-        <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 max-w-2xl mx-auto w-full">
-          <div className="flex items-center gap-2 mb-6">
-            <span className="text-2xl">{formIcon}</span>
-            <h2 className="text-2xl font-bold text-slate-900">{formTitle}</h2>
+        <div style={{ background: '#ffffff', borderRadius: '18px', padding: '32px', border: '0.5px solid #ebe9e4', maxWidth: '600px', margin: '0 auto 48px', width: '100%' }}>
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', alignItems: 'center' }}>
+            <span style={{ fontSize: '24px' }}>{formIcon}</span>
+            <h2 style={{ fontSize: '20px', fontWeight: '500', color: '#1a1a1a' }}>{formTitle}</h2>
           </div>
           <ItemForm defaultType={type} userId={userId} onCreated={handleFormCreated} />
         </div>
       )}
 
       {/* Category Filter */}
-      <div>
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Filter by Category</h3>
-        <div className="flex flex-wrap gap-2">
+      <div style={{ marginBottom: '32px' }}>
+        <div style={{ fontSize: '12px', color: '#999', marginBottom: '12px', fontWeight: '500' }}>Filter by</div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
           <button
             onClick={() => setSelectedCategory(null)}
-            className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
-              selectedCategory === null
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-            }`}
+            style={{
+              padding: '6px 15px',
+              borderRadius: '40px',
+              border: selectedCategory === null ? 'none' : '0.5px solid #ddd',
+              background: selectedCategory === null ? '#0d9e6e' : '#ffffff',
+              color: selectedCategory === null ? '#ffffff' : '#777',
+              fontSize: '13px',
+              fontWeight: '500',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              if (selectedCategory !== null) e.target.style.background = '#f9f9f9';
+            }}
+            onMouseLeave={(e) => {
+              if (selectedCategory !== null) e.target.style.background = '#ffffff';
+            }}
           >
             All
           </button>
@@ -55,11 +56,23 @@ export default function LostFoundToggle({ type, userId, formTitle, formIcon }) {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
-                selectedCategory === cat
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
+              style={{
+                padding: '6px 15px',
+                borderRadius: '40px',
+                border: selectedCategory === cat ? 'none' : '0.5px solid #ddd',
+                background: selectedCategory === cat ? '#0d9e6e' : '#ffffff',
+                color: selectedCategory === cat ? '#ffffff' : '#777',
+                fontSize: '13px',
+                fontWeight: '500',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                if (selectedCategory !== cat) e.target.style.background = '#f9f9f9';
+              }}
+              onMouseLeave={(e) => {
+                if (selectedCategory !== cat) e.target.style.background = '#ffffff';
+              }}
             >
               {cat}
             </button>
@@ -69,9 +82,9 @@ export default function LostFoundToggle({ type, userId, formTitle, formIcon }) {
 
       {/* Items List */}
       <div>
-        <h2 className="text-2xl font-bold text-slate-900 mb-6">
-          {selectedCategory ? `${selectedCategory} - ${type === 'lost' ? 'Lost' : 'Found'} Items` : `All ${type === 'lost' ? 'Lost' : 'Found'} Items`}
-        </h2>
+        <div style={{ fontSize: '11px', color: '#aaa', marginBottom: '16px', fontWeight: '500', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+          {selectedCategory ? `${selectedCategory}` : `All ${type === 'lost' ? 'Lost' : 'Found'} Items`}
+        </div>
         <ItemsList type={type} {...(selectedCategory && { category: selectedCategory })} userId={userId} gridLayout={true} />
       </div>
     </div>
