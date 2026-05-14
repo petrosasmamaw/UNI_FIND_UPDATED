@@ -212,14 +212,14 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
                         fontSize: '12px',
                         fontWeight: '500',
                         borderRadius: '20px',
-                        background: togglingStatus === it._id ? '#ddd' : '#0d9e6e',
-                        color: '#fff',
-                        border: 'none',
-                        cursor: togglingStatus === it._id ? 'not-allowed' : 'pointer',
-                        transition: 'background 0.2s'
-                      }}
-                      onMouseEnter={(e) => !togglingStatus && (e.target.style.background = '#0a8456')}
-                      onMouseLeave={(e) => !togglingStatus && (e.target.style.background = '#0d9e6e')}
+                      background: togglingStatus === it._id ? '#ddd' : '#0a6f47',
+                      color: '#fff',
+                      border: 'none',
+                      cursor: togglingStatus === it._id ? 'not-allowed' : 'pointer',
+                      transition: 'background 0.2s'
+                    }}
+                    onMouseEnter={(e) => !togglingStatus && (e.target.style.background = '#073d2a')}
+                    onMouseLeave={(e) => !togglingStatus && (e.target.style.background = '#0a6f47')}
                     >
                       {togglingStatus === it._id
                         ? 'Updating...'
@@ -235,7 +235,7 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
                           fontSize: '12px',
                           fontWeight: '500',
                           borderRadius: '20px',
-                          background: '#0d9e6e',
+                          background: '#0a6f47',
                           color: '#fff',
                           border: 'none',
                           cursor: 'pointer',
@@ -243,8 +243,8 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
                           gap: '6px',
                           alignItems: 'center'
                         }}
-                        onMouseEnter={(e) => e.target.style.background = '#0a8456'}
-                        onMouseLeave={(e) => e.target.style.background = '#0d9e6e'}
+                        onMouseEnter={(e) => e.target.style.background = '#073d2a'}
+                        onMouseLeave={(e) => e.target.style.background = '#0a6f47'}
                       >
                         💬 View Chats
                       </button>
