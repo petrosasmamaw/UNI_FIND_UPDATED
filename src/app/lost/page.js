@@ -2,6 +2,7 @@ import ItemsList from '@/components/ItemsList';
 import ItemForm from '@/components/ItemForm';
 import AuthRequiredPage from '@/components/AuthRequiredPage';
 import LostFoundToggle from '@/components/LostFoundToggle';
+import { FileText, Plus } from 'lucide-react'
 import { getServerSession } from '@/lib/session';
 import { headers } from 'next/headers';
 
@@ -47,13 +48,13 @@ export default async function LostPage() {
               transition: 'background 0.2s'
             }}
           >
-            <span>+</span>
+            <Plus size={14} color="white" />
             Add Lost Item
           </a>
         </header>
 
         <div id="report-form">
-          <LostFoundToggle type="lost" userId={userId} formTitle="Report Lost Item" formIcon="📝" />
+          <LostFoundToggle type="lost" userId={userId} formTitle="Report Lost Item" formIcon={<FileText size={18} />} />
         </div>
       </div>
     </main>

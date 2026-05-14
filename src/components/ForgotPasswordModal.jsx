@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { authClient } from "@/lib/authClient";
+import { X, CheckCircle } from 'lucide-react'
 
 export default function ForgotPasswordModal({ isOpen, onClose }) {
   const [email, setEmail] = useState("");
@@ -53,13 +54,13 @@ export default function ForgotPasswordModal({ isOpen, onClose }) {
             onClick={onClose}
             className="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 text-2xl leading-none"
           >
-            ✕
+            <X size={20} />
           </button>
         </div>
 
         {success ? (
           <div className="text-center">
-            <div className="mb-4 text-4xl">✅</div>
+            <div className="mb-4 text-4xl"><CheckCircle size={32} color="#16a34a" /></div>
             <p className="text-green-600 dark:text-green-400 font-medium mb-2">
               Email sent successfully!
             </p>

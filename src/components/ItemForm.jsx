@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { authClient } from '@/lib/authClient';
+import { FileText, Camera } from 'lucide-react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -160,7 +161,7 @@ export default function ItemForm({ defaultType = 'lost', userId: initialUserId =
             htmlFor="file-input"
             className="block w-full px-4 py-3 border-2 border-dashed border-slate-300 rounded-xl text-center cursor-pointer hover:border-emerald-400 hover:bg-emerald-50 transition text-slate-600 font-medium"
           >
-            {file ? `✓ ${file.name}` : '📷 Click to upload or drag image'}
+            {file ? `✓ ${file.name}` : (<><Camera size={16} style={{ marginRight: 8, verticalAlign: 'text-bottom' }} /> Click to upload or drag image</>)}
           </label>
         </div>
       </div>
@@ -176,7 +177,7 @@ export default function ItemForm({ defaultType = 'lost', userId: initialUserId =
         disabled={loading} 
         className="w-full px-4 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-semibold transition-colors duration-200 shadow-sm hover:shadow-md"
       >
-        {loading ? '⏳ Saving...' : '✨ Create Item'}
+        {loading ? 'Saving...' : (<><FileText size={16} style={{ marginRight: 8 }} />Create Item</>)}
       </button>
     </form>
   );

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Search, Camera, MessageCircle, Zap, Lock, Handshake } from 'lucide-react'
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
@@ -23,37 +24,37 @@ export default function Home() {
       <main className="max-w-6xl mx-auto px-6 pb-20">
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <article className="rounded-xl bg-stone-100 p-6 shadow-sm border border-emerald-100">
-            <div className="text-2xl">🔎</div>
+            <div className="text-2xl"><Search size={24} /></div>
             <h3 className="mt-3 font-bold text-emerald-900">Search & Browse</h3>
             <p className="mt-2 text-sm text-emerald-800/80">Quickly find recent found items posted by the community.</p>
           </article>
 
           <article className="rounded-xl bg-stone-100 p-6 shadow-sm border border-emerald-100">
-            <div className="text-2xl">📸</div>
+            <div className="text-2xl"><Camera size={24} /></div>
             <h3 className="mt-3 font-bold text-emerald-900">Post with Photos</h3>
             <p className="mt-2 text-sm text-emerald-800/80">Upload clear photos to improve match accuracy.</p>
           </article>
 
           <article className="rounded-xl bg-stone-100 p-6 shadow-sm border border-emerald-100">
-            <div className="text-2xl">💬</div>
+            <div className="text-2xl"><MessageCircle size={24} /></div>
             <h3 className="mt-3 font-bold text-emerald-900">Connect Securely</h3>
             <p className="mt-2 text-sm text-emerald-800/80">Message owners securely to arrange safe returns.</p>
           </article>
 
           <article className="rounded-xl bg-stone-100 p-6 shadow-sm border border-emerald-100">
-            <div className="text-2xl">⚡</div>
+            <div className="text-2xl"><Zap size={24} /></div>
             <h3 className="mt-3 font-bold text-emerald-900">Fast Matches</h3>
             <p className="mt-2 text-sm text-emerald-800/80">Smart tagging surfaces likely matches instantly.</p>
           </article>
 
           <article className="rounded-xl bg-stone-100 p-6 shadow-sm border border-emerald-100">
-            <div className="text-2xl">🔒</div>
+            <div className="text-2xl"><Lock size={24} /></div>
             <h3 className="mt-3 font-bold text-emerald-900">Privacy First</h3>
             <p className="mt-2 text-sm text-emerald-800/80">Share just what's needed to reunite items safely.</p>
           </article>
 
           <article className="rounded-xl bg-stone-100 p-6 shadow-sm border border-emerald-100">
-            <div className="text-2xl">🤝</div>
+            <div className="text-2xl"><Handshake size={24} /></div>
             <h3 className="mt-3 font-bold text-emerald-900">Community Driven</h3>
             <p className="mt-2 text-sm text-emerald-800/80">Students helping students — simple and effective.</p>
           </article>

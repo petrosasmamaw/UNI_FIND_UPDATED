@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useRef } from 'react';
+import { MessageCircle, MapPin, Box, Loader2 } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { fetchItems, updateItemStatus } from '@/store/itemsSlice';
@@ -149,7 +150,7 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
     );
   };
 
-  if (status === 'loading') return <div className="p-8 text-center text-slate-400"><div className="inline-block animate-spin">⏳</div> Loading items...</div>;
+  if (status === 'loading') return <div className="p-8 text-center text-slate-400"><div className="inline-block animate-spin"><Loader2 size={20} /></div> Loading items...</div>;
   if (error) return <div className="p-8 text-center text-red-500 font-medium">Error: {error}</div>;
 
   const containerClass = gridLayout
@@ -171,8 +172,8 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
                   decoding="async"
                   className="w-full h-full object-cover"
                 />
-              ) : (
-                <div className="text-5xl">📦</div>
+                ) : (
+                <div className="text-5xl"><Box size={36} /></div>
               )}
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
@@ -197,7 +198,7 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
               </div>
               <p style={{ fontSize: '13px', color: '#666', marginBottom: '12px', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{it.description || 'No description'}</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '11px', color: '#aaa', marginBottom: '12px' }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>📍 {it.location || 'Unknown location'}</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MapPin size={14} />{it.location || 'Unknown location'}</span>
                 <span style={{ color: '#ddd' }}>•</span>
                 <span>{new Date(it.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
               </div>
@@ -246,7 +247,7 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
                         onMouseEnter={(e) => e.target.style.background = '#073d2a'}
                         onMouseLeave={(e) => e.target.style.background = '#0a6f47'}
                       >
-                        💬 View Chats
+                        <MessageCircle size={16} style={{ marginRight: 8 }} />View Chats
                       </button>
                       {chatCounts[it._id] > 0 && (
                         <span style={{ position: 'absolute', top: '-8px', right: '-8px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '22px', height: '22px', fontSize: '11px', fontWeight: '700', color: '#fff', background: '#ef4444', borderRadius: '50%' }}>
@@ -276,7 +277,7 @@ export default function ItemsList({ type, category, userId: propUserId, gridLayo
                     onMouseEnter={(e) => !creatingRoom && (e.target.style.background = '#d0f0eb')}
                     onMouseLeave={(e) => !creatingRoom && (e.target.style.background = '#e8f8f2')}
                   >
-                    💬 {creatingRoom === it._id ? 'Opening chat...' : 'Message'}
+                    <MessageCircle size={16} style={{ marginRight: 8 }} />{creatingRoom === it._id ? 'Opening chat...' : 'Message'}
                   </button>
                 ) : null}
               </div>

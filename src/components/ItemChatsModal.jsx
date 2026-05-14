@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect } from 'react';
+import { X, MessageCircle, Loader2, ChevronRight } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { fetchChatsByItem, clearSelectedItem } from '@/store/chatsSlice';
@@ -47,7 +48,7 @@ export default function ItemChatsModal({ isOpen, itemId, userId, itemTitle }) {
             onClick={handleClose}
             className="text-slate-400 hover:text-slate-600 text-2xl font-bold transition-colors"
           >
-            ✕
+            <X size={20} />
           </button>
         </div>
 
@@ -55,7 +56,7 @@ export default function ItemChatsModal({ isOpen, itemId, userId, itemTitle }) {
         <div className="p-6">
           {loading ? (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin text-3xl">⏳</div>
+              <div className="inline-block animate-spin text-3xl"><Loader2 size={28} /></div>
               <p className="text-slate-500 mt-3">Loading chats...</p>
             </div>
           ) : error ? (
@@ -70,7 +71,7 @@ export default function ItemChatsModal({ isOpen, itemId, userId, itemTitle }) {
             </div>
           ) : selectedItemChats.length === 0 ? (
             <div className="text-center py-12">
-              <div className="text-5xl mb-3">💬</div>
+              <div className="text-5xl mb-3"><MessageCircle size={48} /></div>
               <p className="text-slate-500">No chats yet for this item</p>
             </div>
           ) : (
@@ -101,7 +102,7 @@ export default function ItemChatsModal({ isOpen, itemId, userId, itemTitle }) {
                           })}
                         </p>
                       </div>
-                      <span className="text-xl ml-3">→</span>
+                      <span className="text-xl ml-3"><ChevronRight size={18} /></span>
                     </div>
                   </button>
                 );

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Lock, FileText, MessageCircle, BarChart2 } from 'lucide-react'
 
 export default function AuthRequiredPage({ page = 'page' }) {
   return (
@@ -8,7 +9,7 @@ export default function AuthRequiredPage({ page = 'page' }) {
           {/* Icon */}
           <div className="flex justify-center">
             <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-3xl flex items-center justify-center text-5xl shadow-lg">
-              🔐
+              <Lock size={28} color="white" />
             </div>
           </div>
 
@@ -30,17 +31,17 @@ export default function AuthRequiredPage({ page = 'page' }) {
           {/* Features */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6">
             <div className="space-y-2 p-4 bg-blue-50 rounded-2xl">
-              <div className="text-3xl">📋</div>
+              <div className="text-3xl"><FileText size={28} /></div>
               <p className="font-semibold text-slate-900">Report Items</p>
               <p className="text-sm text-slate-600">Post lost or found items</p>
             </div>
             <div className="space-y-2 p-4 bg-emerald-50 rounded-2xl">
-              <div className="text-3xl">💬</div>
+              <div className="text-3xl"><MessageCircle size={28} /></div>
               <p className="font-semibold text-slate-900">Connect</p>
               <p className="text-sm text-slate-600">Message other users</p>
             </div>
             <div className="space-y-2 p-4 bg-purple-50 rounded-2xl">
-              <div className="text-3xl">📊</div>
+              <div className="text-3xl"><BarChart2 size={28} /></div>
               <p className="font-semibold text-slate-900">Manage</p>
               <p className="text-sm text-slate-600">View your dashboard</p>
             </div>
