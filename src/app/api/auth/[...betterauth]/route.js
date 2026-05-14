@@ -8,7 +8,29 @@ async function proxyAuth(request, paramsPromise) {
 	const params = await paramsPromise;
 	const pathParts = params?.betterauth || [];
 	const search = new URL(request.url).search;
-	const targetUrl = `${AUTH_BACKEND_URL.replace(/\/$/, "")}/api/auth/${pathParts.join("/")}${search}`;
+
+	// Defensive base handling: avoid duplicating `/api/auth` if the env var already includes it
+	const base = AUTH_BACKEND_URL.replace(/\/$/, "");
+	let targetUrl;
+	if (base.endsWith("/api/auth")) {
+		targetUrl = `${base}${pathParts.length ? '/' + pathParts.join('/') : ''}${search}`;
+	} else {
+		targetUrl = `${base}/api/auth${pathParts.length ? '/' + pathParts.join('/') : ''}${search}`;
+	}
+
+	// Helpful debugging when proxying in dev — logs show incoming and outgoing targets
+	try {
+		// eslint-disable-next-line no-console
+		console.debug('[proxyAuth] incoming:', request.method, request.url);
+		// eslint-disable-next-line no-console
+		console.debug('[proxyAuth] params.betterauth:', pathParts);
+		// eslint-disable-next-line no-console
+		console.debug('[proxyAuth] auth backend base:', base);
+		// eslint-disable-next-line no-console
+		console.debug('[proxyAuth] forwarding to:', targetUrl);
+	} catch (e) {
+		// ignore logging errors
+	}
 
 	const headers = new Headers(request.headers);
 	headers.delete("host");
