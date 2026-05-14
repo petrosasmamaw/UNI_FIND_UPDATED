@@ -19,31 +19,41 @@ export default function NavbarClient({ session }) {
   ];
 
   return (
-    <header className="w-full bg-white rounded-b-lg border-b-2 border-black">
+    <header className="w-full bg-white rounded-b-lg navbar-gradient-border">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-20 flex items-center justify-between gap-6">
           <Link href="/" className="flex items-center gap-3 min-w-fit group" aria-label="UniFind home">
             <motion.div whileHover={{ scale: 1.03 }} className="w-11 h-11 rounded-xl bg-gradient-to-br from-accent-primary to-accent-secondary flex items-center justify-center text-white font-syne font-black text-lg">
               U
             </motion.div>
+            {/* Desktop brand (visible on sm+) */}
             <div className="hidden sm:flex flex-col leading-tight">
               <div className="font-syne font-bold text-black transition-colors text-base">UniFind</div>
               <div className="text-xs text-black font-semibold -mt-0.5">Lost & Found</div>
             </div>
+            {/* Mobile compact brand (visible on xs screens) */}
+            <div className="flex sm:hidden flex-col leading-tight">
+              <div className="font-syne font-bold text-black text-sm">UniFind</div>
+            </div>
           </Link>
 
             <div className="hidden md:flex items-center gap-8 flex-1 justify-center">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
-                return (
-                <Link key={item.href} href={item.href} className="relative">
-                  <span className={`inline-block px-4 py-2 rounded-full font-dm-sans font-bold text-sm transition-all ${isActive ? 'text-black bg-glass-hover' : 'text-black hover:text-black/70 hover:bg-glass-hover'}`}>
-                    {item.label}
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
+              <div className="relative bg-white rounded-full px-1 py-1 shadow-sm border border-gray-100 flex items-center gap-3">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+                  return (
+                  <Link key={item.href} href={item.href} className="relative z-10 px-1">
+                    {isActive && (
+                      <motion.span layoutId="nav-active" className="absolute inset-0 m-1 bg-emerald-300 rounded-full shadow-md" />
+                    )}
+                    <span className={`relative inline-block px-4 py-2 rounded-full font-dm-sans font-bold text-sm transition-colors ${isActive ? 'text-black' : 'text-black/80 hover:text-black'}`}>
+                      {item.label}
+                    </span>
+                  </Link>
+                );
+              })}
+              </div>
+            </div>
 
           <div className="flex items-center gap-4 min-w-fit">
             {session?.user && (
