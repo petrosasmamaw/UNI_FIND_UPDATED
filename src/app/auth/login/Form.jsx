@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/authClient";
 import SocialAuthButtons from "@/components/SocialAuthButtons";
+import ForgotPasswordModal from '@/components/ForgotPasswordModal';
 
 export default function LoginForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [forgotOpen, setForgotOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,11 +63,15 @@ export default function LoginForm() {
             <input type="checkbox" className="rounded" />
             <span className="text-white/85">Remember me</span>
           </label>
+          <button type="button" onClick={() => setForgotOpen(true)} className="text-sm text-white/85 hover:underline">
+            Forgot password?
+          </button>
         </div>
         <button type="submit" disabled={loading} className="w-full py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-600 hover:to-teal-500 disabled:opacity-60 text-white font-semibold transition-all">
           {loading ? 'Signing in...' : 'Sign in'}
         </button>
       </form>
+      <ForgotPasswordModal isOpen={forgotOpen} onClose={() => setForgotOpen(false)} />
     </div>
   );
 }

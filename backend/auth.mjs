@@ -66,11 +66,20 @@ export const auth = betterAuth({
       }
 
       const html = getPasswordResetEmailTemplate(user.name || user.email, url);
-      await sendPasswordResetEmail({
-        to: user.email,
-        subject: "Reset your password",
-        html,
-      });
+      try {
+        // Log intent so we can trace which address/URL triggered the email
+        // eslint-disable-next-line no-console
+        console.debug('[auth] sending password reset email to', user.email, 'url:', url);
+        await sendPasswordResetEmail({
+          to: user.email,
+          subject: "Reset your password",
+          html,
+        });
+      } catch (err) {
+        // Log and swallow the error so a provider email failure doesn't return a 500
+        // eslint-disable-next-line no-console
+        console.error('[auth] failed to send password reset email:', err && err.message ? err.message : err);
+      }
     },
     onPasswordReset: async ({ user }) => {
       console.log(`Password for user ${user.email} has been reset.`);

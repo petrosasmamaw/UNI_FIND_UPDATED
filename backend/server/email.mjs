@@ -30,12 +30,19 @@ export async function sendVerificationEmail({ to, subject, html }) {
     return { success: false, skipped: true };
   }
 
-  return transporter.sendMail({
-    from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
-    to,
-    subject,
-    html,
-  });
+  try {
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
+      to,
+      subject,
+      html,
+    });
+    return { success: true, info };
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('[email] sendVerificationEmail error:', err && err.message ? err.message : err);
+    return { success: false, error: err };
+  }
 }
 
 export async function sendPasswordResetEmail({ to, subject, html }) {
@@ -43,10 +50,17 @@ export async function sendPasswordResetEmail({ to, subject, html }) {
     return { success: false, skipped: true };
   }
 
-  return transporter.sendMail({
-    from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
-    to,
-    subject,
-    html,
-  });
+  try {
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
+      to,
+      subject,
+      html,
+    });
+    return { success: true, info };
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('[email] sendPasswordResetEmail error:', err && err.message ? err.message : err);
+    return { success: false, error: err };
+  }
 }
