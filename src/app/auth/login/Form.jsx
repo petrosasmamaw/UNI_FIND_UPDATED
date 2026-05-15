@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/authClient";
+import SocialAuthButtons from "@/components/SocialAuthButtons";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -44,6 +45,8 @@ export default function LoginForm() {
       <h1 className="text-2xl font-extrabold mb-2 text-white">Sign in</h1>
       <p className="text-sm text-white/85 mb-4">Access your account to post and find items on campus</p>
       {error && <p className="text-red-500 mb-2 text-sm">{error}</p>}
+      <SocialAuthButtons callbackURL="/" />
+      <div className="my-3 border-t border-white/10" />
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="block">
           <span className="text-sm text-slate-700 dark:text-slate-300">Email</span>

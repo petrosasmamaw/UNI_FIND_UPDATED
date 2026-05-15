@@ -46,6 +46,20 @@ async function proxyAuth(request, paramsPromise) {
 		redirect: "manual",
 	});
 
+	// In dev, log any redirect location from the auth backend so we can inspect
+	// the exact `redirect_uri` being sent to providers like Google.
+	if (process.env.NODE_ENV !== 'production') {
+		try {
+			const location = response.headers.get('location');
+			if (location) {
+				// eslint-disable-next-line no-console
+				console.debug('[proxyAuth] upstream redirect location:', location);
+			}
+		} catch (e) {
+			// ignore logging errors
+		}
+	}
+
 	const outboundHeaders = new Headers(response.headers);
 	outboundHeaders.delete("content-encoding");
 	outboundHeaders.delete("content-length");
