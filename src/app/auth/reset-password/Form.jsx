@@ -124,53 +124,53 @@ export default function ResetPasswordForm() {
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-white/5 rounded-full blur-2xl"></div>
         
-        <div className="w-full max-w-md p-8 rounded-xl bg-transparent backdrop-blur-md border border-white/10 dark:border-slate-800/40 shadow-sm relative z-10">
-          <h1 className="text-2xl font-bold mb-2 text-slate-900 dark:text-slate-100">
+        <div className="w-full max-w-md p-8 rounded-2xl bg-white/8 backdrop-blur-lg border border-white/20 shadow-lg relative z-10 text-white">
+          <h1 className="text-2xl font-bold mb-2 text-white">
             Reset Password
           </h1>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
+          <p className="text-sm text-white/80 mb-6">
             Enter your new password below
           </p>
 
           {success && (
-            <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg">
-              <p className="text-green-700 dark:text-green-300 font-medium flex items-center gap-2">
+            <div className="mb-4 p-4 bg-white/6 border border-white/10 rounded-lg">
+              <p className="text-white font-medium flex items-center gap-2">
                 ✅ Password reset successfully!
               </p>
-              <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+              <p className="text-sm text-white/80 mt-1">
                 Redirecting to login...
               </p>
             </div>
           )}
 
           {error && (
-            <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg">
-              <p className="text-red-700 dark:text-red-300 font-medium">Error</p>
-              <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+            <div className="mb-4 p-4 bg-red-900/30 border border-red-800 rounded-lg">
+              <p className="text-red-300 font-medium">Error</p>
+              <p className="text-sm text-red-300">{error}</p>
             </div>
           )}
 
           {!error && token && (
             <form onSubmit={handleSubmit} className="space-y-4">
               <label className="block">
-                <span className="text-sm text-slate-700 dark:text-slate-300">
-                  New Password
-                </span>
-                <input
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  required
-                  placeholder="Enter new password"
-                  className="mt-1 block w-full rounded-md border px-3 py-2 dark:bg-slate-800 dark:border-slate-700 dark:text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
-                />
+                  <span className="text-sm text-white/85">
+                    New Password
+                  </span>
+                  <input
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                    placeholder="Enter new password"
+                    className="mt-1 block w-full rounded-md border px-3 py-2 bg-white/6 placeholder-white/60 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
+                  />
                 {newPassword && (
                   <div className="mt-2">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs text-slate-600 dark:text-slate-400">
                         Password strength:
                       </span>
-                      <span className="text-xs font-medium text-slate-700 dark:text-slate-300">
+                      <span className="text-xs font-medium text-white/85">
                         {getPasswordStrengthText()}
                       </span>
                     </div>
@@ -184,13 +184,13 @@ export default function ResetPasswordForm() {
                     </div>
                   </div>
                 )}
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                <p className="text-xs text-white/80 mt-1">
                   At least 8 characters
                 </p>
               </label>
 
               <label className="block">
-                <span className="text-sm text-slate-700 dark:text-slate-300">
+                <span className="text-sm text-white/85">
                   Confirm Password
                 </span>
                 <input
@@ -199,7 +199,7 @@ export default function ResetPasswordForm() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   placeholder="Re-enter password"
-                  className="mt-1 block w-full rounded-md border px-3 py-2 dark:bg-slate-800 dark:border-slate-700 dark:text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
+                  className="mt-1 block w-full rounded-md border px-3 py-2 bg-white/6 placeholder-white/60 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition"
                 />
               </label>
 
@@ -212,16 +212,16 @@ export default function ResetPasswordForm() {
               <button
                 type="submit"
                 disabled={loading || !newPassword || !confirmPassword || newPassword !== confirmPassword}
-                className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 dark:disabled:bg-slate-600 text-white font-medium transition-colors mt-6"
+                className="w-full py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-600 hover:to-teal-500 disabled:opacity-60 text-white font-semibold transition-all mt-6"
               >
                 {loading ? "Resetting..." : "Reset Password"}
               </button>
 
-              <p className="text-sm text-slate-600 dark:text-slate-400 text-center mt-4">
+              <p className="text-sm text-white/80 text-center mt-4">
                 Remember your password?{" "}
                 <a
                   href="/auth/login"
-                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+                  className="text-emerald-400 hover:text-emerald-300 font-medium"
                 >
                   Back to login
                 </a>

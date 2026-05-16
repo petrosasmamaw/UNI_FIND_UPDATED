@@ -46,24 +46,27 @@ export default function RegisterForm() {
       <h1 className="text-2xl font-extrabold mb-2 text-white">Create account</h1>
       <p className="text-sm text-white/85 mb-4">Join UniFind and help reunite items with their owners</p>
       {error && <p className="text-red-500 mb-2 text-sm">{error}</p>}
-      <SocialAuthButtons callbackURL="/" />
-      <div className="my-3 border-t border-white/10" />
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="block">
-          <span className="text-sm text-slate-700 dark:text-slate-300">Name</span>
+          <span className="text-sm text-white/85">Name</span>
           <input name="name" type="text" required className="mt-1 block w-full rounded-md border px-3 py-2 bg-white/6 placeholder-white/60 text-white" />
         </label>
         <label className="block">
-          <span className="text-sm text-slate-700 dark:text-slate-300">Email</span>
+          <span className="text-sm text-white/85">Email</span>
           <input name="email" type="email" required className="mt-1 block w-full rounded-md border px-3 py-2 bg-white/6 placeholder-white/60 text-white" />
         </label>
         <label className="block">
-          <span className="text-sm text-slate-700 dark:text-slate-300">Password</span>
+          <span className="text-sm text-white/85">Password</span>
           <input name="password" type="password" required className="mt-1 block w-full rounded-md border px-3 py-2 bg-white/6 placeholder-white/60 text-white" />
         </label>
-        <button type="submit" disabled={loading} className="w-full py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-600 hover:to-teal-500 disabled:opacity-60 text-white font-semibold transition-all">
-          {loading ? 'Creating...' : 'Create account'}
-        </button>
+        <div className="flex items-center gap-3">
+          <button type="submit" disabled={loading} className="flex-1 py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-600 hover:to-teal-500 disabled:opacity-60 text-white font-semibold transition-all">
+            {loading ? 'Creating...' : 'Create account'}
+          </button>
+          <div className="self-stretch flex items-center">
+            <SocialAuthButtons callbackURL="/" />
+          </div>
+        </div>
       </form>
     </div>
   );
