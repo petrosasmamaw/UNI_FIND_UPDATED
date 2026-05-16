@@ -65,13 +65,12 @@ export default function LoginForm() {
             Forgot password?
           </button>
         </div>
-        <div className="flex items-center gap-3">
-          <button type="submit" disabled={loading} className="flex-1 py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-600 hover:to-teal-500 disabled:opacity-60 text-white font-semibold transition-all">
-            {loading ? 'Signing in...' : 'Sign in'}
-          </button>
-          <div className="self-stretch flex items-center">
-            <SocialAuthButtons callbackURL="/" />
-          </div>
+        <button type="submit" disabled={loading} className="w-full py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-600 hover:to-teal-500 disabled:opacity-60 text-white font-semibold transition-all">
+          {loading ? 'Signing in...' : 'Sign in'}
+        </button>
+
+        <div className="mt-3 flex gap-3 justify-center">
+          <SocialAuthButtons callbackURL="/" />
         </div>
       </form>
       <ForgotPasswordModal isOpen={forgotOpen} onClose={() => setForgotOpen(false)} />

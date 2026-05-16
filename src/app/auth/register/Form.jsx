@@ -59,13 +59,12 @@ export default function RegisterForm() {
           <span className="text-sm text-white/85">Password</span>
           <input name="password" type="password" required className="mt-1 block w-full rounded-md border px-3 py-2 bg-white/6 placeholder-white/60 text-white" />
         </label>
-        <div className="flex items-center gap-3">
-          <button type="submit" disabled={loading} className="flex-1 py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-600 hover:to-teal-500 disabled:opacity-60 text-white font-semibold transition-all">
-            {loading ? 'Creating...' : 'Create account'}
-          </button>
-          <div className="self-stretch flex items-center">
-            <SocialAuthButtons callbackURL="/" />
-          </div>
+        <button type="submit" disabled={loading} className="w-full py-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-600 hover:to-teal-500 disabled:opacity-60 text-white font-semibold transition-all">
+          {loading ? 'Creating...' : 'Create account'}
+        </button>
+
+        <div className="mt-3 flex gap-3 justify-center">
+          <SocialAuthButtons callbackURL="/" />
         </div>
       </form>
     </div>
